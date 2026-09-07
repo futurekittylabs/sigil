@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1430"
+   LastUpgradeVersion = "2660"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,10 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D7BC049FCBE5634A9399ECF7"
+               BlueprintIdentifier = "2F16277A2A267CB014C9C0B6"
                BuildableName = "Sigil.app"
                BlueprintName = "Sigil"
-               ReferencedContainer = "container:Sigil.xcodeproj">
+               ReferencedContainer = "container:Sigil-macOS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,16 +32,14 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D7BC049FCBE5634A9399ECF7"
+            BlueprintIdentifier = "2F16277A2A267CB014C9C0B6"
             BuildableName = "Sigil.app"
             BlueprintName = "Sigil"
-            ReferencedContainer = "container:Sigil.xcodeproj">
+            ReferencedContainer = "container:Sigil-macOS.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
       </Testables>
-      <CommandLineArguments>
-      </CommandLineArguments>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -57,10 +55,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D7BC049FCBE5634A9399ECF7"
+            BlueprintIdentifier = "2F16277A2A267CB014C9C0B6"
             BuildableName = "Sigil.app"
             BlueprintName = "Sigil"
-            ReferencedContainer = "container:Sigil.xcodeproj">
+            ReferencedContainer = "container:Sigil-macOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -76,14 +74,12 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D7BC049FCBE5634A9399ECF7"
+            BlueprintIdentifier = "2F16277A2A267CB014C9C0B6"
             BuildableName = "Sigil.app"
             BlueprintName = "Sigil"
-            ReferencedContainer = "container:Sigil.xcodeproj">
+            ReferencedContainer = "container:Sigil-macOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <CommandLineArguments>
-      </CommandLineArguments>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

@@ -1,12 +1,20 @@
 dev:
     pnpm --filter sigil-site dev
 
-# Build and launch the native macOS app.
+# Optional: open the projects for editing and interactive debugging.
+xcode:
+    xcrun xed apps/macos/Sigil-macOS.xcodeproj apps/ios/Sigil-iOS.xcodeproj
+
+# Build and launch a fresh instance of the macOS app.
 alias macos := dev-macos
 dev-macos:
-    bash apps/macos/run.sh
+    xcodebuild -project apps/macos/Sigil-macOS.xcodeproj -scheme Sigil-macOS -configuration Debug -destination 'platform=macOS' -derivedDataPath .build/macos build
+    open -n .build/macos/Build/Products/Debug/Sigil.app
 
-# Build and launch the iOS app in Simulator (optionally specify a device UDID).
 alias ios := dev-ios
-dev-ios device="":
-    bash apps/ios/run.sh {{quote(device)}}
+dev-ios device="booted":
+    xcrun simctl bootstatus {{quote(device)}} -b
+    xcodebuild -project apps/ios/Sigil-iOS.xcodeproj -scheme Sigil-iOS -configuration Debug -destination 'generic/platform=iOS Simulator' -derivedDataPath .build/ios build
+    xcrun simctl install {{quote(device)}} .build/ios/Build/Products/Debug-iphonesimulator/Sigil.app
+    open -a Simulator
+    xcrun simctl launch --terminate-running-process {{quote(device)}} dev.sigil.ios

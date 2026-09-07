@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1430"
+   LastUpgradeVersion = "2660"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,10 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D7BC049FCBE5634A9399ECF7"
+               BlueprintIdentifier = "4326F612860F26476F59F502"
                BuildableName = "Sigil.app"
                BlueprintName = "Sigil"
-               ReferencedContainer = "container:Sigil.xcodeproj">
+               ReferencedContainer = "container:Sigil-iOS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D7BC049FCBE5634A9399ECF7"
+            BlueprintIdentifier = "4326F612860F26476F59F502"
             BuildableName = "Sigil.app"
             BlueprintName = "Sigil"
-            ReferencedContainer = "container:Sigil.xcodeproj">
+            ReferencedContainer = "container:Sigil-iOS.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -55,10 +55,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D7BC049FCBE5634A9399ECF7"
+            BlueprintIdentifier = "4326F612860F26476F59F502"
             BuildableName = "Sigil.app"
             BlueprintName = "Sigil"
-            ReferencedContainer = "container:Sigil.xcodeproj">
+            ReferencedContainer = "container:Sigil-iOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -74,10 +74,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D7BC049FCBE5634A9399ECF7"
+            BlueprintIdentifier = "4326F612860F26476F59F502"
             BuildableName = "Sigil.app"
             BlueprintName = "Sigil"
-            ReferencedContainer = "container:Sigil.xcodeproj">
+            ReferencedContainer = "container:Sigil-iOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
