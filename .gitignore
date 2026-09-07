@@ -27,3 +27,9 @@ pnpm-debug.log*
 
 # ai
 .codex/
+
+# Apple build output and per-user Xcode state
+.build/
+DerivedData/
+xcuserdata/
+*.xcuserstate
