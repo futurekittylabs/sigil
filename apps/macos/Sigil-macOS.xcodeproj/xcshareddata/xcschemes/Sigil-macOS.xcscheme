@@ -15,7 +15,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2F16277A2A267CB014C9C0B6"
+               BlueprintIdentifier = "8DDE5079304F51B5005893BB"
                BuildableName = "Sigil.app"
                BlueprintName = "Sigil"
                ReferencedContainer = "container:Sigil-macOS.xcodeproj">
@@ -32,7 +32,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2F16277A2A267CB014C9C0B6"
+            BlueprintIdentifier = "8DDE5079304F51B5005893BB"
             BuildableName = "Sigil.app"
             BlueprintName = "Sigil"
             ReferencedContainer = "container:Sigil-macOS.xcodeproj">
@@ -55,7 +55,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2F16277A2A267CB014C9C0B6"
+            BlueprintIdentifier = "8DDE5079304F51B5005893BB"
             BuildableName = "Sigil.app"
             BlueprintName = "Sigil"
             ReferencedContainer = "container:Sigil-macOS.xcodeproj">
@@ -74,7 +74,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2F16277A2A267CB014C9C0B6"
+            BlueprintIdentifier = "8DDE5079304F51B5005893BB"
             BuildableName = "Sigil.app"
             BlueprintName = "Sigil"
             ReferencedContainer = "container:Sigil-macOS.xcodeproj">

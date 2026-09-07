@@ -8,109 +8,110 @@
 
 /* Begin PBXBuildFile section */
 		3FA1EB74D09FDBE68C3DB76A /* Sigil.icon in Resources */ = {isa = PBXBuildFile; fileRef = EA30E0EF4178049859927E08 /* Sigil.icon */; };
-		DEEB2496E111C47D65B384FF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680FBD69BD654083B54C7050 /* ContentView.swift */; };
-		F60E5CDD5C6349D7CAD4F576 /* SigilApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D66415287341CEC7474FE58 /* SigilApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		27A812CE468529966C648F90 /* Sigil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sigil.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5D66415287341CEC7474FE58 /* SigilApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigilApp.swift; sourceTree = "<group>"; };
-		680FBD69BD654083B54C7050 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		EA30E0EF4178049859927E08 /* Sigil.icon */ = {isa = PBXFileReference; path = Sigil.icon; sourceTree = "<group>"; };
+		EA30E0EF4178049859927E08 /* Sigil.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; name = Sigil.icon; path = ../../images/Sigil.icon; sourceTree = "<group>"; };
+		8DDE507A304F51B5005893BB /* Sigil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sigil.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXGroup section */
-		B01A3D351476933FBFDAC298 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				27A812CE468529966C648F90 /* Sigil.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		B294FA9862AD5FBD2CACA765 /* images */ = {
-			isa = PBXGroup;
-			children = (
-				EA30E0EF4178049859927E08 /* Sigil.icon */,
-			);
-			name = images;
-			path = ../../images;
-			sourceTree = "<group>";
-		};
-		BEA7A4522EE0D543C686ACA1 /* Sigil */ = {
-			isa = PBXGroup;
-			children = (
-				680FBD69BD654083B54C7050 /* ContentView.swift */,
-				5D66415287341CEC7474FE58 /* SigilApp.swift */,
-			);
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		8DDE507C304F51B5005893BB /* Sigil */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Sigil;
 			sourceTree = "<group>";
 		};
-		F2D042DF5DDAF1B5C911FE50 = {
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DDE5077304F51B5005893BB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8DDE5071304F51B5005893BB = {
 			isa = PBXGroup;
 			children = (
-				B294FA9862AD5FBD2CACA765 /* images */,
-				BEA7A4522EE0D543C686ACA1 /* Sigil */,
-				B01A3D351476933FBFDAC298 /* Products */,
+				EA30E0EF4178049859927E08 /* Sigil.icon */,
+				8DDE507C304F51B5005893BB /* Sigil */,
+				8DDE507B304F51B5005893BB /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		8DDE507B304F51B5005893BB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DDE507A304F51B5005893BB /* Sigil.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2F16277A2A267CB014C9C0B6 /* Sigil */ = {
+		8DDE5079304F51B5005893BB /* Sigil */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BD459301FD33EBD60802FAE2 /* Build configuration list for PBXNativeTarget "Sigil" */;
+			buildConfigurationList = 8DDE5085304F51B5005893BB /* Build configuration list for PBXNativeTarget "Sigil" */;
 			buildPhases = (
-				9182DF73CDDB902070D30E29 /* Sources */,
-				D0884C3936C13482AC6F215D /* Resources */,
+				8DDE5076304F51B5005893BB /* Sources */,
+				8DDE5077304F51B5005893BB /* Frameworks */,
+				8DDE5078304F51B5005893BB /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				8DDE507C304F51B5005893BB /* Sigil */,
+			);
 			name = Sigil;
 			packageProductDependencies = (
 			);
 			productName = Sigil;
-			productReference = 27A812CE468529966C648F90 /* Sigil.app */;
+			productReference = 8DDE507A304F51B5005893BB /* Sigil.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		F3C1529BB0D2D187E211AA5C /* Project object */ = {
+		8DDE5072304F51B5005893BB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = YES;
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2660;
 				LastUpgradeCheck = 2660;
 				TargetAttributes = {
-					2F16277A2A267CB014C9C0B6 = {
-						ProvisioningStyle = Manual;
+					8DDE5079304F51B5005893BB = {
+						CreatedOnToolsVersion = 26.6;
 					};
 				};
 			};
-			buildConfigurationList = 8F2787A402D5C6E97193B381 /* Build configuration list for PBXProject "Sigil-macOS" */;
-			compatibilityVersion = "Xcode 14.0";
+			buildConfigurationList = 8DDE5075304F51B5005893BB /* Build configuration list for PBXProject "Sigil-macOS" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				Base,
 				en,
+				Base,
 			);
-			mainGroup = F2D042DF5DDAF1B5C911FE50;
+			mainGroup = 8DDE5071304F51B5005893BB;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
+			productRefGroup = 8DDE507B304F51B5005893BB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2F16277A2A267CB014C9C0B6 /* Sigil */,
+				8DDE5079304F51B5005893BB /* Sigil */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		D0884C3936C13482AC6F215D /* Resources */ = {
+		8DDE5078304F51B5005893BB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -121,26 +122,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		9182DF73CDDB902070D30E29 /* Sources */ = {
+		8DDE5076304F51B5005893BB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEEB2496E111C47D65B384FF /* ContentView.swift in Sources */,
-				F60E5CDD5C6349D7CAD4F576 /* SigilApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		302858AEFF4FADECEE6FAF36 /* Debug */ = {
+		8DDE5083304F51B5005893BB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -167,18 +166,17 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
 					"DEBUG=1",
+					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -186,27 +184,25 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
-		4D7E9E3897634AB088F81983 /* Release */ = {
+		8DDE5084304F51B5005893BB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -233,12 +229,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -246,82 +241,99 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
-		901BB62898885CE81F0705DD /* Debug */ = {
+		8DDE5086304F51B5005893BB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Sigil;
-				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEAD_CODE_STRIPPING = YES;
+				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Sigil;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.sigil.macos;
-				SDKROOT = macosx;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
-		B1D8FB63B3468B9E840C2052 /* Release */ = {
+		8DDE5087304F51B5005893BB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Sigil;
-				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEAD_CODE_STRIPPING = YES;
+				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Sigil;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.sigil.macos;
-				SDKROOT = macosx;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8F2787A402D5C6E97193B381 /* Build configuration list for PBXProject "Sigil-macOS" */ = {
+		8DDE5075304F51B5005893BB /* Build configuration list for PBXProject "Sigil-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				302858AEFF4FADECEE6FAF36 /* Debug */,
-				4D7E9E3897634AB088F81983 /* Release */,
+				8DDE5083304F51B5005893BB /* Debug */,
+				8DDE5084304F51B5005893BB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
-		BD459301FD33EBD60802FAE2 /* Build configuration list for PBXNativeTarget "Sigil" */ = {
+		8DDE5085304F51B5005893BB /* Build configuration list for PBXNativeTarget "Sigil" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				901BB62898885CE81F0705DD /* Debug */,
-				B1D8FB63B3468B9E840C2052 /* Release */,
+				8DDE5086304F51B5005893BB /* Debug */,
+				8DDE5087304F51B5005893BB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = F3C1529BB0D2D187E211AA5C /* Project object */;
+	rootObject = 8DDE5072304F51B5005893BB /* Project object */;
 }

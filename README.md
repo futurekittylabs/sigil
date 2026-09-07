@@ -11,12 +11,7 @@ just ios
 
 Both commands build and launch the app. `just ios` automatically boots an iPhone 17 Pro simulator. To choose another installed device, use `just ios "device name or UUID"`.
 
-Projects are checked in. After editing a `project.yml`, regenerate with [XcodeGen](https://github.com/yonaskolb/XcodeGen):
-
-```sh
-xcodegen generate --spec apps/macos/project.yml
-xcodegen generate --spec apps/ios/project.yml
-```
+Open the projects in `apps/ios` or `apps/macos` for editing and debugging in Xcode. Source folders are synchronized automatically.
 
 See [images](images/README.md) for the shared app icon.
 
