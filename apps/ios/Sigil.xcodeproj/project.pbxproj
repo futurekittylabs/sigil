@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		74555D47113827A7A188C4D9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C9F379595739E99FC2F6FF /* ContentView.swift */; };
 		7B181B629FD7FADE7BE459BC /* SigilApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4876508E82EEE0DF0A1A5CEB /* SigilApp.swift */; };
+		C2C9136DAE246F89E1260A87 /* Sigil.icon in Resources */ = {isa = PBXBuildFile; fileRef = F219B6F9E62311A8D8972ED8 /* Sigil.icon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		34C9F379595739E99FC2F6FF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4876508E82EEE0DF0A1A5CEB /* SigilApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigilApp.swift; sourceTree = "<group>"; };
 		EA49A4A477D8CF991A8790FC /* Sigil.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Sigil.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F219B6F9E62311A8D8972ED8 /* Sigil.icon */ = {isa = PBXFileReference; path = Sigil.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -35,9 +37,19 @@
 			path = Sigil;
 			sourceTree = "<group>";
 		};
+		4B9EF612DA3B6C6F90ABFE5F /* images */ = {
+			isa = PBXGroup;
+			children = (
+				F219B6F9E62311A8D8972ED8 /* Sigil.icon */,
+			);
+			name = images;
+			path = ../../images;
+			sourceTree = "<group>";
+		};
 		CDE6CA157462BAD9A06C10A8 = {
 			isa = PBXGroup;
 			children = (
+				4B9EF612DA3B6C6F90ABFE5F /* images */,
 				49E6D65BF49AAD030C2DDF20 /* Sigil */,
 				383B262F9C6D39C86DF46E3A /* Products */,
 			);
@@ -51,6 +63,7 @@
 			buildConfigurationList = 9870A4DE3D50BF38EF5F385C /* Build configuration list for PBXNativeTarget "Sigil" */;
 			buildPhases = (
 				AECF0E1B007B2FD7EE05960C /* Sources */,
+				B776FDB3264F829C7D4423D9 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -91,6 +104,17 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		B776FDB3264F829C7D4423D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2C9136DAE246F89E1260A87 /* Sigil.icon in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AECF0E1B007B2FD7EE05960C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -107,7 +131,7 @@
 		34CB60C18F6A356C8BD2DFFB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Sigil;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
@@ -132,7 +156,7 @@
 		3E0E190AA2C9776E14FBF3E6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Sigil;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;

@@ -33,3 +33,5 @@ xcodegen generate --spec apps/ios/project.yml
 ```
 
 Bootstrap references: Apple's [Create a project](https://developer.apple.com/tutorials/develop-in-swift/create-a-project) tutorial (SwiftUI, Swift, no testing system or storage), [SwiftUI App](https://developer.apple.com/documentation/swiftui/app), [Xcode system requirements](https://developer.apple.com/xcode/system-requirements/), and [Swift getting started](https://www.swift.org/getting-started/). The Swift sources follow the installed Xcode App template; XcodeGen automates project-file creation instead of using the New Project dialog.
+
+Both native apps reference the shared Icon Composer document at `images/Sigil.icon`. See [images/README.md](images/README.md) for artwork and preview generation.
