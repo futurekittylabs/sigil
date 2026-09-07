@@ -12,7 +12,7 @@ dev-macos:
     open -n .build/macos/Build/Products/Debug/Sigil.app
 
 alias ios := dev-ios
-dev-ios device="booted":
+dev-ios device="iPhone 17 Pro":
     xcrun simctl bootstatus {{quote(device)}} -b
     xcodebuild -project apps/ios/Sigil-iOS.xcodeproj -scheme Sigil-iOS -configuration Debug -destination 'generic/platform=iOS Simulator' -derivedDataPath .build/ios build
     xcrun simctl install {{quote(device)}} .build/ios/Build/Products/Debug-iphonesimulator/Sigil.app

@@ -17,11 +17,11 @@ Barebones, separate SwiftUI apps for macOS and iOS, with no third-party app depe
 
 ```sh
 just macos       # Build and launch a fresh macOS app instance
-just ios         # Build and run on an already booted iOS Simulator
+just ios         # Boot an iPhone 17 Pro simulator, build, and run
 just ios <UDID>  # Boot a specific simulator, then build and run
 ```
 
-For iOS, open Simulator and boot a device first, or find a device UUID with `xcrun simctl list devices available` and pass it to `just ios`. Use a UUID when multiple simulators are booted.
+`just ios` boots the configured default device, `iPhone 17 Pro`, and waits until it is ready. No manual Simulator or Xcode startup is needed. To use another installed simulator, pass its name or UUID, for example `just ios "iPad mini (A17 Pro)"`. List devices with `xcrun simctl list devices available`; use a UUID to select an exact device/runtime when names repeat.
 
 Requires macOS 26+, full Xcode with first-launch setup complete, `just`, and an iOS 26+ Simulator runtime for iOS. In Xcode Settings → Components, install an iOS runtime if needed. A developer account is unnecessary for these local Mac and Simulator runs; running on a physical iPhone requires configuring signing in Xcode.
 
