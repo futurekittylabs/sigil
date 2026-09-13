@@ -1,0 +1,59 @@
+name: Sigil
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    env:
+      SIGIL_SIGN_URL: ${{ vars.SIGIL_SIGN_URL }}
+    steps:
+      - uses: actions/github-script@373c709c69115d41ff229c7e5df9f8788daa9553
+        with:
+          script: |
+            const marker = "<!-- sigil-sign-pr -->";
+            const pullRequest = context.payload.pull_request;
+            if (!process.env.SIGIL_SIGN_URL) {
+              throw new Error("Set the SIGIL_SIGN_URL repository variable.");
+            }
+            const signingURL = new URL(process.env.SIGIL_SIGN_URL);
+            if (signingURL.protocol !== "https:") {
+              throw new Error("SIGIL_SIGN_URL must use HTTPS.");
+            }
+            signingURL.search = new URLSearchParams({
+              repository: `${context.repo.owner}/${context.repo.repo}`,
+              pull_request: pullRequest.html_url,
+              commit: pullRequest.head.sha,
+            });
+            const body = `${marker}\n[Sign PR with Sigil](${signingURL})`;
+            const comments = await github.paginate(
+              github.rest.issues.listComments,
+              {
+                ...context.repo,
+                issue_number: pullRequest.number,
+                per_page: 100,
+              },
+            );
+            const existing = comments.find(
+              (comment) =>
+                comment.user?.type === "Bot" && comment.body?.startsWith(marker),
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                ...context.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                ...context.repo,
+                issue_number: pullRequest.number,
+                body,
+              });
+            }
