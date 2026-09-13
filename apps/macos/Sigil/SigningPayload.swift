@@ -62,6 +62,28 @@ struct SignedPayload: Encodable {
         case payload, signature
         case publicKey = "public_key"
     }
+
+    var comment: String {
+        if payload.action == .register {
+            return """
+                ### Register Sigil signer
+
+                Add this key to `SIGIL_APPROVED_SIGNERS` in `.github/workflows/sigil.yml`:
+
+                ```yaml
+                SIGIL_APPROVED_SIGNERS: |
+                  \(publicKey)
+                ```
+                """
+        }
+        let proof = try! JSONEncoder().encode(self).base64URL
+        return """
+            <!-- sigil:\(proof) -->
+            ### Signed with Sigil
+
+            Commit `\(payload.commit)`
+            """
+    }
 }
 
 extension Data {

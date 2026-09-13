@@ -4,6 +4,8 @@ import SwiftUI
 struct ContentView: View {
     @State private var output = "sign your first datetime"
     @State private var signing = false
+    @State private var comment: String?
+    @State private var pullRequestURL: URL?
 
     var body: some View {
         VStack(spacing: 16) {
@@ -14,6 +16,10 @@ struct ContentView: View {
             Text(output)
                 .foregroundStyle(output == "sign your first datetime" ? .secondary : .primary)
                 .textSelection(.enabled)
+
+            if comment != nil {
+                Button("Copy & Open PR", action: copy)
+            }
         }
         .padding(24)
         .frame(minWidth: 360, minHeight: 160)
@@ -28,27 +34,28 @@ struct ContentView: View {
         await perform {
             _ = try SecureSigner().sign(Data(value.utf8), reason: "Sign this datetime?\n\(value)")
             output = "Signed \(value)"
+            comment = nil
         }
     }
 
     private func sign(_ payload: SigningPayload) async {
         await perform {
             let signed = try SecureSigner().sign(payload.message, reason: payload.reason)
-            var request = URLRequest(url: URL(string: "https://sigil.fklabs.workers.dev/sign")!)
-            request.httpMethod = "POST"
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.httpBody = try JSONEncoder().encode(SignedPayload(
+            comment = SignedPayload(
                 payload: payload,
                 publicKey: signed.key.base64URL,
                 signature: signed.signature.base64URL
-            ))
-            let (_, response) = try await URLSession.shared.data(for: request)
-            guard (response as? HTTPURLResponse)?.statusCode == 204 else {
-                throw URLError(.badServerResponse)
-            }
-            output = payload.action == .register ? "Signer registered" : "PR signed"
-            NSWorkspace.shared.open(payload.pullRequestURL)
+            ).comment
+            pullRequestURL = payload.pullRequestURL
+            output = payload.action == .register ? "Signer ready" : "PR signed"
         }
+    }
+
+    private func copy() {
+        guard let comment, let pullRequestURL else { return }
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(comment, forType: .string)
+        NSWorkspace.shared.open(pullRequestURL)
     }
 
     private func perform(_ operation: () async throws -> Void) async {
