@@ -3,7 +3,7 @@ import SwiftUI
 @main
 struct SigilApp: App {
     var body: some Scene {
-        WindowGroup {
+        Window("Sigil", id: "main") {
             ContentView()
         }
     }

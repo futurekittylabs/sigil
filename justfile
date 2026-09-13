@@ -1,6 +1,12 @@
 dev:
     pnpm --filter sigil-site dev
 
+build:
+    xcodebuild -quiet -project apps/macos/Sigil-macOS.xcodeproj -scheme Sigil-macOS \
+        -configuration Release -derivedDataPath .build/macos build
+    rm -rf /Applications/Sigil.app
+    ditto .build/macos/Build/Products/Release/Sigil.app /Applications/Sigil.app
+
 macos:
     xcodebuild -project apps/macos/Sigil-macOS.xcodeproj -scheme Sigil-macOS \
         -derivedDataPath .build/macos
