@@ -3,49 +3,108 @@ name: Sigil
 on:
   pull_request_target:
     types: [opened, reopened, synchronize]
+  issue_comment:
+    types: [created]
 
-permissions:
-  pull-requests: write
+permissions: {}
+
+env:
+  SIGIL_APPROVED_SIGNERS: |
 
 jobs:
-  comment:
+  request:
+    if: github.event_name == 'pull_request_target'
+    permissions:
+      issues: write
+      statuses: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@373c709c69115d41ff229c7e5df9f8788daa9553
         with:
           script: |
+            const pull = context.payload.pull_request;
+            const link = action => {
+              const url = new URL("https://sigil.fklabs.workers.dev/sign");
+              url.search = new URLSearchParams({
+                action,
+                repository: `${context.repo.owner}/${context.repo.repo}`,
+                pull_request: String(pull.number),
+                commit: pull.head.sha,
+              });
+              return url;
+            };
             const marker = "<!-- sigil-sign-pr -->";
-            const pullRequest = context.payload.pull_request;
-            const signingURL = new URL("https://sigil.fklabs.workers.dev/sign");
-            signingURL.search = new URLSearchParams({
-              repository: `${context.repo.owner}/${context.repo.repo}`,
-              pull_request: pullRequest.html_url,
-              commit: pullRequest.head.sha,
+            const body = `${marker}\n[Register signer](${link("register")}) · [Sign PR with Sigil](${link("sign")})`;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              ...context.repo, issue_number: pull.number, per_page: 100,
             });
-            const body = `${marker}\n[Sign PR with Sigil](${signingURL})`;
-            const comments = await github.paginate(
-              github.rest.issues.listComments,
-              {
-                ...context.repo,
-                issue_number: pullRequest.number,
-                per_page: 100,
-              },
-            );
-            const existing = comments.find(
-              (comment) =>
-                comment.user?.type === "Bot" && comment.body?.startsWith(marker),
-            );
+            const existing = comments.find(({ user, body }) =>
+              user?.type === "Bot" && body?.startsWith(marker));
+            const params = { ...context.repo, body };
+            await (existing
+              ? github.rest.issues.updateComment({ ...params, comment_id: existing.id })
+              : github.rest.issues.createComment({ ...params, issue_number: pull.number }));
+            await github.rest.repos.createCommitStatus({
+              ...context.repo,
+              sha: pull.head.sha,
+              state: "pending",
+              context: "Sigil approval",
+              description: "Waiting for an approved signer",
+            });
 
-            if (existing) {
-              await github.rest.issues.updateComment({
-                ...context.repo,
-                comment_id: existing.id,
-                body,
-              });
-            } else {
-              await github.rest.issues.createComment({
-                ...context.repo,
-                issue_number: pullRequest.number,
-                body,
-              });
-            }
+  verify:
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '<!-- sigil:')
+    permissions:
+      pull-requests: read
+      statuses: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@373c709c69115d41ff229c7e5df9f8788daa9553
+        env:
+          COMMENT: ${{ github.event.comment.body }}
+        with:
+          script: |
+            const crypto = require("node:crypto");
+            const fail = message => { throw new Error(message); };
+            const match = process.env.COMMENT.match(/<!-- sigil:([A-Za-z0-9_-]+) -->/);
+            if (!match) fail("Invalid Sigil proof");
+            const signed = JSON.parse(Buffer.from(match[1], "base64url"));
+            const { payload, public_key: key, signature } = signed;
+            const now = Math.floor(Date.now() / 1000);
+            const { data: pull } = await github.rest.pulls.get({
+              ...context.repo, pull_number: context.issue.number,
+            });
+            if (
+              payload?.action !== "sign" ||
+              payload.repository.toLowerCase() !== `${context.repo.owner}/${context.repo.repo}`.toLowerCase() ||
+              payload.pull_request !== context.issue.number ||
+              payload.commit !== pull.head.sha ||
+              !Number.isSafeInteger(payload.expires_at) ||
+              payload.expires_at < now || payload.expires_at > now + 300
+            ) fail("Signature does not match this pull request");
+
+            const approved = new Set(process.env.SIGIL_APPROVED_SIGNERS.split(/\s+/).filter(Boolean));
+            if (!approved.has(key)) fail("Signer is not approved");
+            const publicKey = Buffer.from(key, "base64url");
+            const der = Buffer.concat([
+              Buffer.from("3059301306072a8648ce3d020106082a8648ce3d030107034200", "hex"),
+              publicKey,
+            ]);
+            const message = [
+              "sigil/v1", payload.action, payload.repository, payload.pull_request,
+              payload.commit, payload.expires_at,
+            ].join("\n");
+            if (publicKey.length !== 65 || !crypto.verify(
+              "sha256", Buffer.from(message),
+              { key: crypto.createPublicKey({ key: der, format: "der", type: "spki" }) },
+              Buffer.from(signature, "base64url"),
+            )) fail("Invalid signature");
+
+            await github.rest.repos.createCommitStatus({
+              ...context.repo,
+              sha: pull.head.sha,
+              state: "success",
+              context: "Sigil approval",
+              description: "Approved with Touch ID",
+              target_url: context.payload.comment.html_url,
+            });
