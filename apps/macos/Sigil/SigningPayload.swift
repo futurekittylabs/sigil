@@ -1,98 +1,74 @@
 import Foundation
 
-enum SigningPayload {
-    case dateTime(String)
-    case pullRequest(PullRequestSigningRequest)
-
-    static func dateTime(at date: Date) -> Self {
-        .dateTime(date.formatted(date: .abbreviated, time: .complete))
+struct SigningPayload: Codable {
+    enum Action: String, Codable {
+        case register
+        case sign
     }
 
-    var authenticationReason: String {
-        switch self {
-        case .dateTime(let dateTime):
-            "Sign this datetime?\n\(dateTime)"
-        case .pullRequest(let request):
-            "Sign this PR?\n\(request.pullRequestURL.absoluteString)\nCommit \(request.commit)"
-        }
+    let action: Action
+    let repository: String
+    let pullRequest: Int
+    let commit: String
+    let expiresAt: Int
+
+    enum CodingKeys: String, CodingKey {
+        case action, repository, commit
+        case pullRequest = "pull_request"
+        case expiresAt = "expires_at"
     }
 
-    var signedText: String {
-        switch self {
-        case .dateTime(let dateTime):
-            "Signed \(dateTime)"
-        case .pullRequest(let request):
-            "Signed \(request.pullRequestURL.absoluteString)\nCommit \(request.commit)"
+    init?(url: URL) {
+        guard url.scheme == "sigil", url.host == "sign",
+              let items = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems,
+              items.count == 4,
+              Set(items.map(\.name)).count == 4,
+              let actionValue = items.first(where: { $0.name == "action" })?.value,
+              let action = Action(rawValue: actionValue),
+              let repository = items.first(where: { $0.name == "repository" })?.value,
+              repository.range(of: "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$", options: .regularExpression) != nil,
+              let number = items.first(where: { $0.name == "pull_request" })?.value,
+              let pullRequest = Int(number), pullRequest > 0,
+              let commit = items.first(where: { $0.name == "commit" })?.value,
+              commit.range(of: "^[0-9a-f]{40}$", options: .regularExpression) != nil else {
+            return nil
         }
+        self.action = action
+        self.repository = repository
+        self.pullRequest = pullRequest
+        self.commit = commit
+        expiresAt = Int(Date.now.timeIntervalSince1970) + 300
+    }
+
+    var message: Data {
+        Data("sigil/v1\n\(action.rawValue)\n\(repository)\n\(pullRequest)\n\(commit)\n\(expiresAt)".utf8)
+    }
+
+    var reason: String {
+        "\(action == .register ? "Register signer for" : "Sign") \(repository)#\(pullRequest)?\nCommit \(commit)"
+    }
+
+    var pullRequestURL: URL {
+        URL(string: "https://github.com/\(repository)/pull/\(pullRequest)")!
     }
 }
 
-struct PullRequestSigningRequest {
-    let repository: String
-    let pullRequestURL: URL
-    let commit: String
+struct SignedPayload: Encodable {
+    let payload: SigningPayload
+    let publicKey: String
+    let signature: String
 
-    init?(url: URL) {
-        guard url.scheme == "sigil", url.host == "sign", url.path.isEmpty,
-              let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-              let items = components.queryItems,
-              items.count == 3,
-              let repository = Self.value(named: "repository", in: items),
-              let pullRequest = Self.value(named: "pull_request", in: items),
-              let commit = Self.value(named: "commit", in: items),
-              Self.isValid(repository: repository),
-              Self.isValid(commit: commit),
-              let pullRequestURL = URL(string: pullRequest),
-              Self.isValid(pullRequestURL: pullRequestURL, repository: repository) else {
-            return nil
-        }
-
-        self.repository = repository
-        self.pullRequestURL = pullRequestURL
-        self.commit = commit
+    enum CodingKeys: String, CodingKey {
+        case payload, signature
+        case publicKey = "public_key"
     }
+}
 
-    private static func value(named name: String, in items: [URLQueryItem]) -> String? {
-        let matches = items.filter { $0.name == name }
-        guard matches.count == 1, let value = matches[0].value, !value.isEmpty else {
-            return nil
-        }
-        return value
-    }
-
-    private static func isValid(repository: String) -> Bool {
-        let parts = repository.split(separator: "/", omittingEmptySubsequences: false)
-        let allowed = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.")
-
-        return parts.count == 2 && parts.allSatisfy { part in
-            !part.isEmpty && part.count <= 100 && part.unicodeScalars.allSatisfy(allowed.contains)
-        }
-    }
-
-    private static func isValid(commit: String) -> Bool {
-        let hexadecimal = CharacterSet(charactersIn: "0123456789abcdefABCDEF")
-        return commit.count == 40 && commit.unicodeScalars.allSatisfy(hexadecimal.contains)
-    }
-
-    private static func isValid(pullRequestURL: URL, repository: String) -> Bool {
-        guard let components = URLComponents(url: pullRequestURL, resolvingAgainstBaseURL: false),
-              components.scheme == "https",
-              components.host == "github.com",
-              components.user == nil,
-              components.password == nil,
-              components.port == nil,
-              components.query == nil,
-              components.fragment == nil else {
-            return false
-        }
-
-        let repositoryParts = repository.split(separator: "/")
-        let pathParts = components.path.split(separator: "/")
-
-        return pathParts.count == 4
-            && pathParts[0].caseInsensitiveCompare(repositoryParts[0]) == .orderedSame
-            && pathParts[1].caseInsensitiveCompare(repositoryParts[1]) == .orderedSame
-            && pathParts[2] == "pull"
-            && Int(pathParts[3]).map { $0 > 0 } == true
+extension Data {
+    var base64URL: String {
+        base64EncodedString()
+            .replacingOccurrences(of: "+", with: "-")
+            .replacingOccurrences(of: "/", with: "_")
+            .replacingOccurrences(of: "=", with: "")
     }
 }
